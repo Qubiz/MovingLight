@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Moving Light</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="hue_seek_bar_header">HUE</string>
+    <string name="saturation_seek_bar_header">SATURATION</string>
+    <string name="brightness_seek_bar_header">BRIGHTNESS</string>
     <string name="action_settings">Settings</string>
 </resources>
