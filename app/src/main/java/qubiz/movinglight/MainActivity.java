@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceView;
 import android.widget.SeekBar;
 
 
@@ -21,6 +22,8 @@ public class MainActivity extends ActionBarActivity {
     private SeekBar seekBarHue;
     private SeekBar seekBarSaturation;
     private SeekBar seekBarBrightness;
+
+    private SurfaceView surfaceViewColor;
 
     float hue;
     float saturation;
@@ -37,7 +40,6 @@ public class MainActivity extends ActionBarActivity {
         detectChanges(seekBarHue);
         detectChanges(seekBarSaturation);
         detectChanges(seekBarBrightness);
-
     }
 
     @Override
@@ -151,16 +153,19 @@ public class MainActivity extends ActionBarActivity {
                         hue = progress;
                         seekBarSaturation.setProgressDrawable(createSaturationDrawable());
                         seekBarBrightness.setProgressDrawable(createBrightnessDrawable());
+                        surfaceViewColor.setBackgroundColor(Color.HSVToColor(new float[]{hue, saturation, brightness}));
                         break;
                     case R.id.seek_bar_saturation:
                         saturation = progress/100f;
                         seekBarHue.setProgressDrawable(createHUEDrawable());
                         seekBarBrightness.setProgressDrawable(createBrightnessDrawable());
+                        surfaceViewColor.setBackgroundColor(Color.HSVToColor(new float[]{hue, saturation, brightness}));
                         break;
                     case R.id.seek_bar_brightness:
                         brightness = progress/100f;
                         seekBarSaturation.setProgressDrawable(createSaturationDrawable());
                         seekBarHue.setProgressDrawable(createHUEDrawable());
+                        surfaceViewColor.setBackgroundColor(Color.HSVToColor(new float[]{hue, saturation, brightness}));
                         break;
                 }
             }
@@ -182,13 +187,17 @@ public class MainActivity extends ActionBarActivity {
         seekBarSaturation   = (SeekBar) findViewById(R.id.seek_bar_saturation);
         seekBarBrightness   = (SeekBar) findViewById(R.id.seek_bar_brightness);
 
+        surfaceViewColor = (SurfaceView) findViewById(R.id.surface_view_color);
+
         hue         = seekBarHue.getProgress();
-        saturation  = seekBarSaturation.getProgress()/100f;
-        brightness  = seekBarBrightness.getProgress()/100f;
+        saturation  = seekBarSaturation.getProgress() / 100f;
+        brightness  = seekBarBrightness.getProgress()/ 100f;
 
 
         seekBarHue.setProgressDrawable(createHUEDrawable());
         seekBarSaturation.setProgressDrawable(createSaturationDrawable());
         seekBarBrightness.setProgressDrawable(createBrightnessDrawable());
+
+        surfaceViewColor.setBackgroundColor(Color.HSVToColor(new float[] {hue, saturation, brightness}));
     }
 }
